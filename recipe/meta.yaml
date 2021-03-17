@@ -10,7 +10,7 @@ source:
   sha256: 8bad82cf25c69dc140405601448c4d5c539934f8fda4ea7abd45c3c566252cfe
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - nbrobot = robotkernel.nbreader:robot
@@ -31,7 +31,7 @@ requirements:
     - pillow
     - pygments
     - python >=3.6
-    - robotframework >=3.1
+    - robotframework >=3.1,<4
     - setuptools
 
 test:

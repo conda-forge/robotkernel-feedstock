@@ -1,5 +1,5 @@
 {% set name = "robotkernel" %}
-{% set version = "1.5.0" %}
+{% set version = "1.5.1" %}
 
 package:
   name: {{ name }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 3689513a77ebe2b257afc934b3d66d4a158053b990be9a8fc198c8d212ddf966
+  sha256: b984b11cdd33688b3d457e93cdbaa1de5859868abb28c82aeb3b51e0afb6e05f
 
 build:
-  number: 1
+  number: 0
   noarch: python
   entry_points:
     - nbrobot = robotkernel.nbreader:robot

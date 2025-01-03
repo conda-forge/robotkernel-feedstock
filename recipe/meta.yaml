@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 126cc82f46e80f4d6c598cae29364cdba5e1326b9571cf1b39518d220402a67e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - nbrobot = robotkernel.nbreader:robot
@@ -21,7 +21,7 @@ requirements:
   host:
     - pip
     - pytest-runner
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - docutils
     - ipykernel
@@ -30,7 +30,7 @@ requirements:
     - nbformat
     - pillow
     - pygments
-    - python >=3.6
+    - python >={{ python_min }}
     - robotframework >=3.1,<5
     - setuptools
 
@@ -45,6 +45,7 @@ test:
   requires:
     - pip
     - pytest
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/robotkernel/

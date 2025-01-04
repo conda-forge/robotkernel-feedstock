@@ -1,27 +1,28 @@
-{% set name = "robotkernel" %}
 {% set version = "1.6" %}
 
 package:
-  name: {{ name }}
+  name: robotkernel
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/r/robotkernel/robotkernel-{{ version }}.tar.gz
   sha256: 126cc82f46e80f4d6c598cae29364cdba5e1326b9571cf1b39518d220402a67e
 
 build:
-  number: 0
+  number: 1
   noarch: python
+  script:
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
   entry_points:
     - nbrobot = robotkernel.nbreader:robot
     - nblibdoc = robotkernel.nbreader:libdoc
-  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
     - pytest-runner
-    - python >=3.6
+    - python {{ python_min }}
+    - setuptools
   run:
     - docutils
     - ipykernel
@@ -30,24 +31,26 @@ requirements:
     - nbformat
     - pillow
     - pygments
-    - python >=3.6
+    - python >={{ python_min }}
     - robotframework >=3.1,<5
     - setuptools
 
 test:
   source_files:
     - tests
-  imports:
-    - robotkernel
-  commands:
-    - python -m pip check
-    - cd tests && pytest -vv
   requires:
     - pip
     - pytest
+    - python {{ python_min }}
+  imports:
+    - robotkernel
+  commands:
+    - pip check
+    - cd tests
+    - pytest -vv --tb=long --color=yes
 
 about:
-  home: https://pypi.org/project/robotkernel/
+  home: https://pypi.org/project/robotkernel
   summary: A Jupyter kernel for interactive acceptance-test-driven development with the Robot Framework
   license: BSD-3-Clause
   license_file: LICENSE
